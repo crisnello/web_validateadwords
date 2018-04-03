@@ -1,0 +1,154 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      >
+    
+ 	<ui:composition template="/pages/produto/template.xhtml" >
+ 	
+ 	<ui:define name="menu_esquerdo" >
+				<table id="hor-minimalist-a" cellspacing="0" border="0">
+					<thead>
+					<tr>
+						<th scope="col" align="left">Produtos</th>
+						<th align="right">
+							<h:graphicImage url="/assets/images/icons/grey/badge.png"/>
+						</th>
+					</tr>
+					</thead>
+					<tbody>
+						<ui:repeat var="u" value="#{produtoBean.produtos}">
+							<tr>
+								<td colspan="2">
+								<h:form>
+									<h:commandLink value="#{u.NOME}" action="#{produtoBean.abrirEditar}" >
+										<f:param value="#{u.id}" name="id" />
+									</h:commandLink>
+								</h:form>									
+								</td>
+							</tr>
+						</ui:repeat>
+					</tbody>
+				</table>
+ 	</ui:define>
+ 	
+ 		<ui:define name="conteudo" >
+ 			<table id="hor-minimalist-a" cellspacing="0" border="0">
+				<thead>
+				<tr>
+					<th scope="col" align="left">Arquivo: #{produtoBean.arquivo.nome}</th>
+					<th align="right">
+						
+					</th>
+				</tr>
+				</thead>
+			</table>
+ 			<h:form id="form_produto_add">
+ 				<p:messages id="mensagens" />
+ 				<h:inputHidden name="idArquivo" value="#{arquivoBean.arquivo.id}" />
+ 				<h:inputHidden name="id" value="#{produtoBean.produto.id}" />
+ 				<table width="90%">
+ 					<tr>
+ 						<td>
+ 							<p:outputLabel value="Codigo" for="codigo"/>
+ 							<p:inputMask value="#{produtoBean.produto.CODIGO}" id="codigo" size="15" maxlength="15" />
+ 						</td>
+ 						<td>
+ 							<p:outputLabel value="Nome" for="nome"/>
+ 							<p:inputText value="#{produtoBean.produto.NOME}" id="nome" size="40" maxlength="50" required="true" requiredMessage="O campo nome � obrigat�rio."/>
+ 						</td>
+ 					</tr>
+ 					<tr>
+ 						<td colspan="2">
+ 							<p:outputLabel value="Descrição" for="descricao"/>
+ 							<p:inputText value="#{produtoBean.produto.DESCRICAO}" id="descricao" size="70" maxlength="200" required="true" requiredMessage="O campo email é obrigatório."  >
+ 							</p:inputText>
+ 						</td>
+ 					</tr>
+ 					<tr>
+ 						<td>
+ 							<p:outputLabel value="Preço De" for="preco_de"/>
+ 							<p:inputText value="#{produtoBean.produto.PRECO_DE}" id="preco_de" size="20" maxlength="25" required="true" requiredMessage="O campo nome é obrigatório."/>
+ 						</td>
+ 						<td>
+ 							<p:outputLabel value="Preço" for="preco"/>
+ 							<p:inputText value="#{produtoBean.produto.PRECO}" id="preco" size="15" maxlength="15" />
+ 						</td>
+ 					</tr>
+ 					<tr>
+ 						<td>
+ 							<p:outputLabel value="Numero de Parcelas" for="nparcela"/>
+ 							<p:inputText value="#{produtoBean.produto.NPARCELA}" id="nparcela" size="10" maxlength="10" required="true" requiredMessage="O campo nome é obrigatório."/>
+ 						</td>
+ 						<td>
+ 							<p:outputLabel value="Valor da Parcela" for="vparcela"/>
+ 							<p:inputText value="#{produtoBean.produto.VPARCELA}" id="vparcela" size="10" maxlength="10" />
+ 						</td>
+ 					</tr>
+					<tr>
+ 						<td colspan="2">
+ 							<p:outputLabel value="Url" for="url"/>
+ 							<p:inputText value="#{produtoBean.produto.URL}" id="url" size="45" maxlength="45" required="true" requiredMessage="O campo nome é obrigatório."/>
+ 						</td>
+ 					</tr>
+ 					<tr><td colspan="2">
+ 							<p:outputLabel value="url da imagem" for="url_imagem"/>
+ 							<p:inputText value="#{produtoBean.produto.URL_IMAGEM}" id="url_imagem" size="45" maxlength="45" />
+ 						</td>
+ 					</tr>
+					<tr>
+ 						<td>
+ 							<p:outputLabel value="Departamento" for="departamento"/>
+ 							<p:inputText value="#{produtoBean.produto.DEPARTAMENTO}" id="departamento" size="20" maxlength="25" required="true" requiredMessage="O campo nome é obrigatório."/>
+ 						</td>
+ 						<td>
+ 							<p:outputLabel value="SubDepartamento" for="subdepartamento"/>
+ 							<p:inputText value="#{produtoBean.produto.SUBDEPARTAMENTO}" id="subdepartamento" size="15" maxlength="15" />
+ 						</td>
+ 					</tr>
+					<tr>
+ 						<td>
+ 							<p:outputLabel value="Editora" for="editora"/>
+ 							<p:inputText value="#{produtoBean.produto.EDITORA}" id="editora" size="20" maxlength="25" required="true" requiredMessage="O campo nome é obrigatório."/>
+ 						</td>
+ 						<td>
+ 							<p:outputLabel value="Ean" for="ean"/>
+ 							<p:inputText value="#{produtoBean.produto.EAN}" id="ean" size="15" maxlength="15" />
+ 						</td>
+ 					</tr>
+					<tr>
+ 						<td>
+ 							<p:outputLabel value="SKU" for="sku"/>
+ 							<p:inputText value="#{produtoBean.produto.SKU}" id="sku" size="10" maxlength="15" required="true" requiredMessage="O campo nome é obrigatório."/>
+ 						</td>
+ 						<td>
+ 							<p:outputLabel value="Disponibilidade" for="disponibilidade"/>
+ 							<p:inputText value="#{produtoBean.produto.DISPONIBILIDADE}" id="disponibilidade" size="10" maxlength="10" />
+ 						</td>
+ 					</tr>
+ 					
+ 					 	<tr>
+	 					<td colspan="2">
+	 					
+	 					</td>
+	 				</tr>
+ 		 				
+ 				</table>
+ 				
+ 				<p:confirmDialog id="confirmDialog" message="Tem certeza que deseja excluir o produto"  header="Atenção" severity="alert" widgetVar="confirmation">  
+			        <p:commandButton id="confirm" value="Confirmar" process="form_produto_add" action="#{produtoBean.excluir}" ajax="false" immediate="true">
+			        	<f:param name="id" value="#{produtoBean.produto.id}" />
+			        </p:commandButton>  
+			        <p:commandButton id="decline" value="Cancelar" onclick="confirmation.hide()" type="button" />   
+    			</p:confirmDialog>
+    			
+ 			</h:form>
+ 		</ui:define>
+ 		
+ 		
+  	</ui:composition>
+</html>

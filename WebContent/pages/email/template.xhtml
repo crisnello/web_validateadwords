@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      >
+    
+ 	<ui:composition template="/pages/templates/template_content.xhtml" >
+ 		<ui:define name="js">
+ 			<script src="#{request.contextPath}/assets/js/sys_email.js"></script>
+ 		</ui:define>
+ 	
+ 		<ui:define name="menu_esquerdo">
+ 			<div class="novo">
+ 				<h:form>
+					<h:commandLink value="+ Novo Email" action="#{emailBean.emailAdd}"/> 				
+ 				</h:form>
+			</div>
+			<h:form>
+				<table id="hor-minimalist-a" cellspacing="0">
+					<thead>
+					<tr>
+						<th scope="col" align="left">EMAIL CADASTRADOS</th>
+						<th align="right">
+							<h:graphicImage url="/assets/images/icons/grey/ID.png"/>
+						</th>
+					</tr>
+					</thead>
+					<tbody>
+						<ui:repeat var="u" value="#{emailBean.emails}">
+							<tr>
+								<td colspan="2">
+									<h:commandLink value="#{u.destinatario}" action="#{emailBean.abrirEditar}">
+										<f:param value="#{u.id}" name="id" />
+									</h:commandLink>
+								</td>
+							</tr>
+						</ui:repeat>
+					</tbody>
+				</table>
+			</h:form>
+ 		</ui:define>
+ 	
+  	</ui:composition>
+</html>

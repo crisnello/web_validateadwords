@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      >
+    
+ 	<ui:composition template="/pages/perfil/template_perfil.xhtml" >
+ 		<ui:define name="conteudo" >
+ 			<h:form id="form_senha">
+ 				<p:messages />
+ 				<h:panelGrid columns="1">
+ 					<p:outputLabel value="Senha Atual" for="senha" />
+ 					<p:keyboard password="true" value="#{perfilBean.senha}" id="senha" size="30" maxlength="30" required="true" requiredMessage="O campo senha atual é obrigatório." >	
+ 					</p:keyboard>
+ 					
+ 					<p:outputLabel value="Nova senha" for="novaSenha"/>
+ 					<p:keyboard password="true" value="#{perfilBean.novaSenha}" id="novaSenha" size="30" maxlength="30" required="true" requiredMessage="O campo nova senha é obrigatório." validatorMessage="Tamanho mínimo de 6 caracteres." >
+ 						<f:validateLength minimum="6" />
+ 					</p:keyboard>
+ 					
+ 					<p:outputLabel value="Repita a nova senha" for="repeatNovaSenha"/>
+ 					<p:keyboard password="true" value="#{perfilBean.repeatNovaSenha}" id="repeatNovaSenha" maxlength="30" size="30" required="true" requiredMessage="O campo repita a nova senha é obrigatório." validatorMessage="Tamanho mínimo de 6 caracteres.">
+ 						<f:validateLength minimum="6" />
+ 					</p:keyboard>
+ 				</h:panelGrid>
+ 				<br/>
+ 				<p:commandButton value="Alterar Senha" actionListener="#{perfilBean.alterarSenha}" process="form_senha" update="form_senha" icon="ui-icon-transferthick-e-w"/>
+ 			</h:form>
+ 		</ui:define>
+  	</ui:composition>
+</html>

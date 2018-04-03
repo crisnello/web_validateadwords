@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core" 
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      >
+  <h:head>
+    <title>Validar XML adwords Magazine luiza</title>
+    
+    <meta name="description" content="Sistema para validar XML" />
+	<meta name="keywords" content="xml, validação, magazine luiza" />
+    
+    <link rel="shortcut icon" href="#{request.contextPath}/world.png" type="image/x-icon" />
+    <script type="text/javascript" src="#{request.contextPath}/assets/js/primefaces.locale.js"></script>
+    
+    <link href="#{request.contextPath}/assets/css/style.css" rel="stylesheet" type="text/css" media="screen"/>
+    <link href="#{request.contextPath}/assets/css/style_tables.css" rel="stylesheet" type="text/css" media="screen"/>
+    
+    <ui:insert name="css">
+	</ui:insert>
+	
+    <script type="text/javascript" src="#{request.contextPath}/assets/js/jquery.json-2.2.min.js"></script>
+    <script type="text/javascript" src="#{request.contextPath}/assets/js/sys_funcoes.js"></script>
+    <script type="text/javascript" src="#{request.contextPath}/assets/js/jquery.minmax-compressed.js"></script>
+    
+    <ui:insert name="js">
+	</ui:insert>
+	
+	<c:if test="#{usuario != null}">
+		<script type="text/javascript">
+			reloadPage('#{request.contextPath}#{home}.jsf');
+		</script>
+	</c:if>
+	
+  </h:head>
+  <h:body>
+    <ui:insert name="body">
+		<div class="bar">
+				<div class="header content clearfix">
+					<span class="signup-button">
+							
+					</span>
+				</div>
+			</div>
+  		
+			<ui:insert name="content">
+			</ui:insert>
+			
+			<div id="footer">
+				<div class="footer content clearfix">
+					<ul>
+					  <li> 2012 ©</li>
+					  
+					</ul>
+				</div>
+			</div>
+	</ui:insert>
+  </h:body>
+</html>

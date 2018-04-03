@@ -1,0 +1,129 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      >
+    
+ 	<ui:composition template="/pages/usuario/template.xhtml" >
+ 		<ui:define name="conteudo" >
+ 			<h:form id="form_usuario_add">
+ 				<p:messages id="mensagens" />
+ 				
+ 				<table width="90%">
+ 					<tr>
+ 						<td>
+ 							<p:outputLabel value="Nome" for="nome"/>
+ 							<p:inputText value="#{usuarioBean.usuario.nome}" id="nome" size="40" maxlength="50" required="true" requiredMessage="O campo nome é obrigatório."/>
+ 						</td>
+ 						<td>
+ 							<p:outputLabel value="CPF" for="cpf"/>
+ 							<p:inputMask value="#{usuarioBean.usuario.cpf}" id="cpf" size="15" maxlength="15" mask="999.999.999-99"/>
+ 						</td>
+ 					</tr>
+ 					
+ 					<tr>
+ 						<td>
+ 							<p:outputLabel value="Telefone" for="telefone"/>
+ 							<p:inputMask value="#{usuarioBean.usuario.telefone}" id="telefone" size="15" maxlength="13" mask="(99)9999-9999"/>
+ 						</td>
+ 						<td>
+ 							<p:outputLabel value="Celular" for="celular"/>
+ 							<p:inputMask value="#{usuarioBean.usuario.celular}" id="celular" size="15" maxlength="13" mask="(99)9999-9999"/>
+ 						</td>
+ 					</tr>
+ 					
+ 					<tr>
+ 						<td colspan="2">
+ 							<p:outputLabel value="CEP" for="cep"/>
+ 							<p:inputMask value="#{usuarioBean.usuario.cep}" id="cep" size="15" maxlength="10" mask="99999-999" >
+ 								<f:ajax listener="#{usuarioBean.buscarCEP}" render="endereco bairro cidade uf" event="blur"/>
+ 							</p:inputMask>
+ 						</td>
+ 					</tr>
+ 					
+ 					<tr>
+ 						<td>
+ 							<p:outputLabel value="Endereço" for="endereco"/>
+ 							<p:inputText value="#{usuarioBean.usuario.endereco}" id="endereco" size="40" maxlength="100"/>
+ 						</td>
+ 						<td>
+ 							<p:outputLabel value="Número" for="numero"/>
+ 							<p:inputText value="#{usuarioBean.usuario.numero}" id="numero" size="15" maxlength="8" >
+ 								<f:convertNumber />
+ 							</p:inputText>
+ 						</td>
+ 					</tr>
+ 					
+ 					<tr>
+ 						<td>
+ 							<p:outputLabel value="Bairro" for="bairro"/>
+ 							<p:inputText value="#{usuarioBean.usuario.bairro}" id="bairro" size="30" maxlength="70"/>
+ 						</td>
+ 						<td>
+ 							<p:outputLabel value="Complemento" for="complemento"/>
+ 							<p:inputText value="#{usuarioBean.usuario.complemento}" id="complemento" size="30" maxlength="50"/>
+ 						</td>
+ 					</tr>
+ 					
+ 					<tr>
+ 						<td>
+ 							<p:outputLabel value="Cidade" for="cidade"/>
+ 							<p:inputText value="#{usuarioBean.usuario.cidade}" id="cidade" size="40" maxlength="70"/>
+ 						</td>
+ 						<td>
+ 							<p:outputLabel value="UF" for="uf"/>
+ 							<p:inputText value="#{usuarioBean.usuario.uf}" id="uf" size="4" maxlength="2"/>
+ 						</td>
+ 					</tr>
+ 					
+ 					<tr>
+ 						<td colspan="2">
+ 							<p:outputLabel value="Email" for="email"/>
+ 							<p:inputText value="#{usuarioBean.usuario.email}" id="email" size="40" maxlength="30" required="true" requiredMessage="O campo email é obrigatório." validator="emailValidator" >
+ 							</p:inputText>
+ 						</td>
+ 					</tr>
+ 					
+ 					<tr>
+ 						<td>
+ 							<p:outputLabel value="Senha" for="senha"/>
+ 							<p:inputText type="password" value="#{usuarioBean.usuario.senha}" id="senha" size="30" maxlength="20" required="true" requiredMessage="O campo senha é obrigatório."/>
+ 						</td>
+ 						<td>
+ 							<p:outputLabel value="Confirme a senha" for="senhaConfirm"/>
+ 							<p:inputText type="password" value="#{usuarioBean.usuario.senhaConfirm}" id="senhaConfirm" size="30" maxlength="20" required="true" requiredMessage="O campo confirme a senha é obrigatório." />
+ 						</td>
+ 					</tr>
+ 					
+ 					<tr>
+ 						<td colspan="2">
+ 							<p:outputLabel value="Selecione as permissões do usuário" for="pickList" />
+ 							<p:pickList id="pickList" value="#{usuarioBean.permissaoPick}" var="permissao" itemLabel="#{permissao.nome}" itemValue="#{permissao}" converter="permissaoConverter"  />
+ 						</td>
+ 					</tr>
+ 					<c:if test="#{usuario.idPerfil == 1 || usuario.idPerfil == 3}">
+	 					<tr>
+	 						<td colspan="2">
+	 							<p:outputLabel value="Perfil" for="perfil" />
+	 							<p:selectOneMenu id="perfil" value="#{usuarioBean.usuario.idPerfil}">  
+						            <f:selectItem itemLabel="Usuário" itemValue="2" />
+						            <f:selectItem itemLabel="Administrador" itemValue="3" />
+						            <c:if test="#{usuario.idPerfil == 1}">
+						           	 <f:selectItem itemLabel="Administrador Geral Sistema" itemValue="1" />
+						            </c:if>
+						        </p:selectOneMenu> 
+	 						</td>
+	 					</tr>
+ 					</c:if>
+ 					
+ 				</table>
+ 				<br/><br/>
+ 				<p:commandButton value="Adicionar" action="#{usuarioBean.adicionar}" ajax="false" process="form_usuario_add" update="@all" icon="ui-icon-plus"/>
+ 			</h:form>
+ 		</ui:define>
+  	</ui:composition>
+</html>

@@ -1,0 +1,69 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      >
+    
+ 	<ui:composition template="/pages/arquivo/template.xhtml" >
+ 		<ui:define name="conteudo" >
+ 			<h:form id="form_arquivo_add">
+ 				<p:messages id="mensagens" />
+ 				
+ 				<h:inputHidden value="#{arquivoBean.arquivo.id}" />
+ 				
+ 				<table width="90%">
+ 					<tr>
+ 						<td>
+ 							<p:outputLabel value="Nome" for="nome"/>
+ 							<p:inputText value="#{arquivoBean.arquivo.nome}" id="nome" size="40" maxlength="50" required="true" requiredMessage="O campo nome é obrigatório."/>
+ 						</td>
+ 						<td>
+ 							<p:outputLabel value="dataCadastro" for="dataCadastro"/>
+ 							<p:inputText value="#{arquivoBean.arquivo.dataCadastro}" id="dataCadastro" size="15" maxlength="15" />
+ 						</td>
+ 					</tr>
+ 					
+ 					<tr>
+ 						<td colspan="2">
+ 							<p:outputLabel value="caminho Completo" for="caminhoCompleto"/>
+ 							<p:inputText value="#{arquivoBean.arquivo.caminhoCompleto}" id="caminhoCompleto" size="70" maxlength="200" required="true" requiredMessage="O campo email é obrigatório."  >
+ 							</p:inputText>
+ 						</td>
+ 					</tr>
+ 					
+ 				 	<tr>
+	 					<td colspan="2">
+	 						<p:commandButton value="Mostrar Produtos" onclick="confirProduct.show()" type="button" />
+	 						<p:commandButton value="Excluir" onclick="confirmation.show()" type="button" icon="ui-icon-trash"/>
+	 					</td>
+	 				</tr>
+ 				
+ 				</table>
+
+
+
+ 				<p:confirmDialog id="confirmProdutoDialog" message="Deseja mostrar os produtos deste arquivo?"  header="Atenção" severity="alert" widgetVar="confirProduct">  
+			        <p:commandButton id="confirmProduto" value="Confirmar" process="form_arquivo_add" action="#{produtoBean.mostrar}" ajax="false" immediate="true">
+			        	<f:param name="id" value="#{arquivoBean.arquivo.id}" />
+			        </p:commandButton>  
+			        <p:commandButton id="declineProduto" value="Cancelar" onclick="confirProduct.hide()" type="button" />   
+    			</p:confirmDialog>
+
+ 				
+ 				<p:confirmDialog id="confirmDialog" message="Tem certeza que deseja excluir o arquivo?"  header="Atenção" severity="alert" widgetVar="confirmation">  
+			        <p:commandButton id="confirm" value="Confirmar" process="form_arquivo_add" action="#{arquivoBean.excluir}" ajax="false" immediate="true">
+			        	<f:param name="id" value="#{arquivoBean.arquivo.id}" />
+			        </p:commandButton>  
+			        <p:commandButton id="decline" value="Cancelar" onclick="confirmation.hide()" type="button" />   
+    			</p:confirmDialog>
+    			
+ 			</h:form>
+ 		</ui:define>
+ 		
+ 		
+  	</ui:composition>
+</html>

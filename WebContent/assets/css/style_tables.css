@@ -1,0 +1,52 @@
+#hor-minimalist-a {
+	background: #fff;
+	border-collapse: collapse;
+	text-align: left;
+}
+
+.in {
+	background-color: whiteSmoke;
+	color: #191919 !important;
+	text-decoration: underline;
+	background-image: url(../images/fundo.png) ;
+	background-position: right;
+	background-repeat: no-repeat;
+}
+
+.tr_in {
+	background-color: whiteSmoke;
+	color: #191919 !important;
+	text-decoration: underline;
+	background-position: right;
+	background-repeat: no-repeat;
+}
+
+.click {
+	background-color: whiteSmoke;
+	color: #AF1515 !important;
+	background-image: url(../images/fundo.png);
+	background-position: right;
+	background-repeat: no-repeat;
+}
+
+#hor-minimalist-a th {
+	font-size: 14px;
+	font-weight: bolder;
+	padding: 10px 8px;
+	border-bottom: 2px solid #ccc;
+}
+
+#hor-minimalist-a td {
+	padding: 8px 8px 8px 8px;
+	border-bottom: 1px solid #FFF;
+	overflow: hidden;
+	text-align: left;
+}
+
+#hor-minimalist-a a {
+	color: #191919;
+}
+
+#hor-minimalist-a tbody tr:hover td {
+	color: #AF1515;
+}

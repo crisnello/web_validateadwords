@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      >
+    
+ 	<ui:composition template="/pages/cliente/template.xhtml" >
+ 		<ui:define name="conteudo" >
+ 			<h:form id="form_add">
+ 				<p:messages id="mensagens" />
+ 				
+ 				<table width="90%">
+ 					<tr>
+ 						<td colspan="2">
+ 							<p:outputLabel value="Nome" for="nome"/>
+ 							<p:inputText value="#{clienteBean.cliente.nome}" id="nome" size="40" maxlength="50" required="true" requiredMessage="O campo nome é obrigatório."/>
+ 						</td>
+ 					</tr>
+
+ 					<tr>
+ 						<td colspan="2">
+ 							<p:outputLabel value="Diretorio de Arquivos" for="diretorioArquivos"/>
+ 							<p:inputText value="#{clienteBean.cliente.diretorioArquivos}" id="diretorioArquivos" size="60" maxlength="200" required="true" requiredMessage="O campo diretorio arquivos é obrigatório."  >
+ 							</p:inputText>
+ 						</td>
+ 					</tr>
+ 					
+ 					
+ 					<tr>
+ 						<td colspan="2">
+ 							<p:outputLabel value="Selecione as funcionalidas que o cliente terá acesso" for="pickList" />
+ 							<p:pickList id="pickList" value="#{clienteBean.permissaoPick}" var="permissao" itemLabel="#{permissao.nome}" itemValue="#{permissao}" converter="permissaoConverter"  />
+ 						</td>
+ 					</tr>
+ 					
+ 				</table>
+ 				<br/><br/>
+ 				<p:commandButton value="Adicionar" action="#{clienteBean.adicionar}" ajax="false" icon="ui-icon-plus"/>
+ 			</h:form>
+ 		</ui:define>
+  	</ui:composition>
+</html>

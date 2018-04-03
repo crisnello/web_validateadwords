@@ -1,0 +1,187 @@
+body {
+	background-image: none !important;
+}
+
+.main {
+	width: auto;
+	max-width: 1000px;
+	min-width: 780px;
+}
+
+.main {
+	margin: 0 auto;
+	width: 650px;
+	padding-top: 43px !important;
+	padding-bottom: 100px !important;
+}
+
+.sign-in {
+	width: 335px;
+	float: right;
+}
+
+form {
+	display: block !important;
+}
+
+.signin-box {
+	margin: 12px 0 0;
+	padding: 20px 25px 15px;
+	background: #F1F1F1;
+	border: 1px solid #E5E5E5;
+}
+
+.signin-box h2 {
+	font-size: 16px;
+	line-height: 17px;
+	height: 16px;
+	margin: 0 0 1.2em;
+	position: relative;
+}
+
+.bar {
+	height: 71px;
+	background: #F1F1F1;
+	border-bottom: 1px solid #E5E5E5;
+	overflow: hidden;
+}
+
+.content {
+	padding: 0 44px;
+}
+
+#footer {
+	position: absolute;
+	bottom: 0;
+	height: 35px;
+	width: 100%;
+	border-top: 1px solid #EBEBEB;
+	overflow: hidden;
+	position: fixed;
+	background-color: #fff;
+}
+
+.footer {
+	padding-top: 13px !important;
+	font-size: 0.9em;
+	white-space: nowrap;
+	line-height: 0;
+}
+
+.clearfix::after {
+	visibility: hidden;
+	display: block;
+	font-size: 0;
+	content: '.';
+	clear: both;
+	height: 0;
+}
+
+ol,ul {
+	list-style: none;
+	line-height: 17px;
+	margin: 0 0 1em;
+}
+
+.footer ul {
+	color: #999;
+	float: left;
+	max-width: 80%;
+}
+
+.footer ul li {
+	display: inline;
+	padding: 0 1.5em 0 0;
+}
+
+li {
+	margin: 0 0 .5em;
+}
+
+.header .signin-button,.header .signup-button {
+	margin: 22px 0 0;
+	float: right;
+}
+
+.header .signup-button a {
+	position: relative;
+	top: -1px;
+	margin: 0 0 0 1em;
+}
+
+.product-info {
+	margin: 0 385px 0 0;
+}
+
+.product-headers {
+	margin: 0 0 1.5em;
+}
+
+.main h1:first-child {
+	margin: 0 0 .92em;
+}
+
+.product-headers h1 {
+	font-size: 25px;
+	margin: 0 !important;
+}
+
+
+.bluetext {
+	color: #1E90FF;
+}
+
+
+.redtext {
+	color: #DD4B39;
+}
+
+.product-headers h2 {
+	font-size: 16px;
+	margin: .4em 0 0;
+}
+
+p {
+	line-height: 17px;
+	margin: 0 0 1em;
+}
+
+.features {
+	overflow: hidden;
+	margin: 2em 0 0;
+}
+
+.features .title {
+	font-size: 16px;
+	margin-bottom: .3em;
+}
+
+.features p {
+	margin: 0 0 0 68px;
+}
+
+.ui-outputlabel {
+	font-weight: bold;
+	margin: 0 0 .5em;
+	display: block;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	user-select: none;
+}
+
+.ui-inputfield {
+	display: inline-block;
+	margin: 0;
+	padding: 0 8px;
+	background: white;
+	border: 1px solid #D9D9D9;
+	border-top: 1px solid silver;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	-webkit-border-radius: 1px;
+	-moz-border-radius: 1px;
+	border-radius: 1px;
+	height: 32px;
+	font-size: 15px;
+}

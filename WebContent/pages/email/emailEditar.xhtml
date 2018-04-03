@@ -1,0 +1,49 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      >
+    
+ 	<ui:composition template="/pages/email/template.xhtml" >
+ 		<ui:define name="conteudo" >
+ 			<h:form id="form_email_add">
+ 				<p:messages id="mensagens" />
+ 				
+ 				<h:inputHidden value="#{emailBean.email.id}" />
+ 				
+ 				<table width="90%">
+ 				
+ 					
+ 					<tr>
+ 						<td colspan="2">
+ 							<p:outputLabel value="Destinatario Email" for="destinatario"/>
+ 							<p:inputText value="#{emailBean.email.destinatario}" id="destinatario" size="40" maxlength="30" required="true" requiredMessage="O campo email é obrigatório." validator="emailValidator" >
+ 							</p:inputText>
+ 						</td>
+ 					</tr>
+ 					
+ 					
+ 					<tr>
+	 					<td colspan="2">
+	 						<p:commandButton value="Salvar" ajax="false" action="#{emailBean.salvarEditar}" icon="ui-icon-disk"/>
+	 						<p:commandButton value="Excluir" onclick="confirmation.show()" type="button" icon="ui-icon-trash"/>
+	 					</td>
+	 				</tr>
+ 				
+ 				</table>
+ 				
+ 				<p:confirmDialog id="confirmDialog" message="Tem certeza que deseja excluir o usuário?"  header="Atenção" severity="alert" widgetVar="confirmation">  
+			        <p:commandButton id="confirm" value="Confirmar" process="form_email_add" action="#{emailBean.excluir}" ajax="false" immediate="true">
+			        	<f:param name="id" value="#{emailBean.email.id}" />
+			        </p:commandButton>  
+			        <p:commandButton id="decline" value="Cancelar" onclick="confirmation.hide()" type="button" />   
+    			</p:confirmDialog>
+    			
+ 			</h:form>
+ 		</ui:define>
+  	</ui:composition>
+</html>

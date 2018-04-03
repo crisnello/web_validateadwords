@@ -1,0 +1,51 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core" 
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      >
+  <ui:composition template="/pages/templates/template.xhtml" >
+  
+  	<ui:define name="body">
+  	<f:view afterPhase="#{authorizationListener.afterPhase}" >
+	    <div class="wrap_full">
+		<div class="wrap">
+		<div id="feature_full">
+			<table class="conteudo">
+				<tr>
+					<td>
+						<ui:insert name="menu_esquerdo">
+						
+						</ui:insert>
+					</td>				
+					<td style="width: 100%;">
+						<ui:insert name="conteudo">
+							<h:form>
+								<p:messages />
+							</h:form>
+						</ui:insert>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<ui:insert name="sub_menu_esquerdo">
+						
+						</ui:insert>
+					</td>				
+					<td style="width: 100%;">
+						<ui:insert name="sub_conteudo">
+
+						</ui:insert>
+					</td>
+				</tr>				
+			</table>
+		</div>
+		</div>	
+	</div>
+	</f:view>
+	</ui:define>
+	</ui:composition>
+</html>

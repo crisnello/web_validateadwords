@@ -1,0 +1,225 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      >
+      
+ 	<ui:composition template="/pages/templates/template_menu.xhtml" >
+ 		
+ 		<ui:define name="js">
+ 			<script src="#{request.contextPath}/assets/js/sys_historico.js?v=#{appBean.versao}"></script>
+ 		</ui:define>
+ 	
+ 		<ui:define name="menu_esquerdo">
+			<div style="padding: 5px; border-bottom: 2px solid #CCC; width: 100%;">
+		
+			</div>
+			
+			<ul id="feature_menu" style="padding: 5px;">
+			    <li>CONSULTAR HISTÓRICO</li>
+			</ul>
+			
+			<h:form id="form_buscar_historico" style="padding: 10px;" prependId="false">
+				<br/>
+				<p:messages />
+				<h:inputHidden value="#{historicoBean.posicionamentos}" id="posicionamentos"/>
+				<table style="padding: 10px;float: right;">
+					 <tr>
+						<td colspan="2">
+							<p:outputLabel value="Arquivo" for="combo_arquivos"/>
+							<p:selectOneMenu id="combo_arquivos" value="#{historicoBean.idArquivo}">
+								<f:selectItems value="#{arquivoBean.arqs}" var="v" itemLabel="#{v.id} - #{v.nome}" itemValue="#{v.id}" />
+							</p:selectOneMenu>
+						</td>
+					</tr>
+					 
+					<tr>
+						<td style="width: 120px;">
+							<p:outputLabel for="data_de" value="Data de" />
+							<p:calendar size="10" value="#{historicoBean.dataDe}" maxdate="#{historicoBean.dataMaxima}" id="data_de" locale="pt_BR" navigator="true" readonlyInput="true" pattern="dd/MM/yyyy">
+							</p:calendar>
+						</td>
+						<td style="width: 120px;">
+							<p:outputLabel for="data_ate" value="Data até"/>
+							<p:calendar size="10" value="#{historicoBean.dataAte}" maxdate="#{historicoBean.dataMaxima}" id="data_ate" locale="pt_BR"  navigator="true" readonlyInput="true" pattern="dd/MM/yyyy">
+							</p:calendar>
+						</td>
+					</tr>
+					<tr>
+						<td colspan="2" align="right" style="padding-top: 10px;">
+							<p:commandButton value="Procurar"  id="procurar"
+								title="Preencha os filtros para buscar o histórico" 
+								actionListener="#{historicoBean.consultarHistorico}"  
+								oncomplete="buscar()" update="form_buscar_historico" process="@form" icon="ui-icon-search"
+								/>
+														
+						</td>
+					</tr>
+				</table>
+				<div style="clear: both;"></div>
+				
+				<div style="height: 70px;"></div>
+
+				
+				<p:blockUI trigger="procurar" block="form_buscar_historico" >
+					<h:graphicImage url="/assets/images/load.gif" />
+				</p:blockUI>
+				<div style="clear: both;"></div>
+			</h:form>
+			
+ 		</ui:define>
+ 		<ui:define name="relatorio">
+ 		
+ 		
+
+ 		 						<h:form id="form">
+
+<p:messages />
+
+    <p:dataTable var="prd" value="#{historicoBean.lazyHistoricos}" paginator="true" rows="10"
+                 paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                 rowsPerPageTemplate="5,10,15" selectionMode="single" selection="#{historicoBean.historico}" id="prdTable" lazy="true">
+
+        <p:ajax event="rowSelect" listener="#{historicoBean.onRowSelect}" update=":form:display"  />
+
+        <p:column headerText="Id" sortBy="#{prd.id}" >
+            <h:outputText value="#{prd.id}" />
+        </p:column>
+
+
+        <p:column headerText="Estado" sortBy="#{prd.tipo}" >
+            <h:outputText value="#{prd.tipo}" />
+        </p:column>
+
+        <p:column headerText="Codigo" sortBy="#{prd.CODIGO}" >
+            <h:outputText value="#{prd.CODIGO}" />
+        </p:column>
+
+				  <p:column headerText="Nome" sortBy="#{prd.NOME}">
+				     <h:outputText value="#{prd.NOME}"/>
+				  </p:column>
+				  
+				  <p:column headerText="Descrição" sortBy="#{prd.DESCRICAO}">
+				    
+				     <h:outputText value="#{prd.DESCRICAO}"/>
+				  </p:column>
+				  <p:column headerText="Preço Ant " sortBy="prd.PRECO_DE">
+				     <h:outputText value="#{prd.PRECO_DE}">
+				     <f:convertNumber maxFractionDigits="2"
+							                       groupingUsed="true"
+							                       currencySymbol="R$"
+							                       maxIntegerDigits="7"
+							                       type="currency"/>
+							                       </h:outputText>
+				  </p:column>
+				  <p:column headerText="Preço" sortBy="#{prd.PRECO}">
+				     <h:outputText value="#{prd.PRECO}" style="color:red !important" rendered="#{prd.PRECO > prd.PRECO_DE}">
+				         <f:convertNumber maxFractionDigits="2"
+							                       groupingUsed="true"
+							                       currencySymbol="R$"
+							                       maxIntegerDigits="7"
+							                       type="currency"/>
+							                       </h:outputText>
+				     <h:outputText value="#{prd.PRECO}" style="color:green !important" rendered="#{prd.PRECO_DE > prd.PRECO}">
+				     <f:convertNumber maxFractionDigits="2"
+							                       groupingUsed="true"
+							                       currencySymbol="R$"
+							                       maxIntegerDigits="7"
+							                       type="currency"/>
+							                       </h:outputText>
+				     <h:outputText value="#{prd.PRECO}" style="color:blue" rendered="#{prd.PRECO_DE == prd.PRECO}">
+				     <f:convertNumber maxFractionDigits="2"
+							                       groupingUsed="true"
+							                       currencySymbol="R$"
+							                       maxIntegerDigits="7"
+							                       type="currency"/>
+							                       </h:outputText>
+				  </p:column>
+				  <p:column headerText="Variação">
+				    
+				     <h:outputText value="#{prd.PRECO / prd.PRECO_DE * 100 - 100}" >
+				     <f:convertNumber maxFractionDigits="2"
+							                       groupingUsed="true"
+							                       currencySymbol="%"
+							                       maxIntegerDigits="7"
+							                       type="currency"/>
+							                       </h:outputText>
+				  </p:column>
+				  
+				  <p:column headerText="DIsponivel" sortBy="#{prd.DISPONIBILIDADE}">
+				     <h:outputText value="#{prd.DISPONIBILIDADE}"/>
+				  </p:column>
+				  
+        <p:column headerText="Categoria" sortBy="#{prd.DEPARTAMENTO}">
+				     <h:outputText value="#{prd.DEPARTAMENTO}"/>
+				  </p:column>
+				  
+    </p:dataTable>
+
+<h:panelGrid columns="2">  
+    <p:panel header="Export All Data">  
+        
+          
+        <h:commandLink>  
+            <p:graphicImage value="/assets/images/csv.png" />  
+            <p:dataExporter type="csv" target="prdTable" fileName="historicos" />  
+        </h:commandLink>  
+ 
+ <h:commandLink>  
+            <p:graphicImage value="/assets/images/excel.png" />  
+            <p:dataExporter type="xls" target="prdTable" fileName="historicos" />  
+        </h:commandLink> 
+ 
+    </p:panel>  
+      
+    <p:panel header="Export Page Data">  
+
+          
+        <h:commandLink>  
+            <p:graphicImage value="/assets/images/csv.png" />  
+            <p:dataExporter type="csv" target="prdTable" fileName="historicos" pageOnly="true"/>  
+        </h:commandLink>  
+          
+     <h:commandLink>  
+            <p:graphicImage value="/assets/images/excel.png" />  
+            <p:dataExporter type="xls" target="prdTable" fileName="historicos" pageOnly="true"/>  
+        </h:commandLink> 
+    </p:panel>  
+</h:panelGrid>  
+
+    <p:dialog header="Produto Detail" widgetVar="prdDialog" resizable="false"
+              showEffect="explode" hideEffect="explode">
+
+        <h:panelGrid id="display" columns="2" cellpadding="4">
+
+            <h:outputText value="Id:" />
+            <h:outputText value="#{historicoBean.historico.id}" style="font-weight:bold"/>
+
+            <h:outputText value="Nome:" />
+            <h:outputText value="#{historicoBean.historico.NOME}" style="font-weight:bold"/>
+        </h:panelGrid>
+    </p:dialog>
+
+
+
+								
+									<div style="clear: both;"></div>
+				
+				<div style="height: 70px;"></div>
+
+				
+				<div style="clear: both;"></div>
+								
+									
+		
+</h:form>
+ 		 				
+ 		</ui:define>
+ 		
+ 		
+  	</ui:composition>
+</html>

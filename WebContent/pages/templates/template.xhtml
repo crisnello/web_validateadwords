@@ -1,0 +1,114 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core" 
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui"
+      >
+  <h:head>
+    <title>Validador de Produtos Magazine Luiza</title>
+    
+    <meta name="description" content="Sistema para validar xml de produtos adwords" />
+	<meta name="keywords" content="xml, validar, magazine luiza" />
+    
+    <link rel="shortcut icon" href="#{request.contextPath}/world.png" type="image/x-icon" />
+    
+    <script type="text/javascript" src="#{request.contextPath}/assets/js/primefaces.locale.js"></script>
+    
+    <link href="#{request.contextPath}/assets/css/style.css" rel="stylesheet" type="text/css" media="screen"/>
+    <link href="#{request.contextPath}/assets/css/style_tables.css" rel="stylesheet" type="text/css" media="screen"/>
+    <ui:insert name="css">
+	</ui:insert>
+	
+	<script type="text/javascript">
+		var baseUrl = "#{request.contextPath}/";
+		var enderecoUsuario = "#{usuario.endereco} #{usuario.numero}, #{usuario.cidade} - #{usuario.uf}";
+	</script>
+	
+    <script type="text/javascript" src="#{request.contextPath}/assets/js/jquery.json-2.2.min.js"></script>
+    <script type="text/javascript" src="#{request.contextPath}/assets/js/sys_funcoes.js"></script>
+    <script type="text/javascript" src="#{request.contextPath}/assets/js/jquery.minmax-compressed.js"></script>
+    
+    <ui:insert name="js">
+	</ui:insert>
+	
+	
+	
+  </h:head>
+  <h:body>
+  	<c:if test="#{usuario !=null}">
+  		<div class="wrap">
+			<h:form prependId="false">
+				<ul id="menu">
+				  
+			       <c:if test="#{permissoes['5'] == true || permissoes['4'] == true || usuario.idPerfil == 1 || usuario.idPerfil == 3}">
+			       		<li><h:commandLink value="Usuários" action="#{usuarioBean.template}" id='aba_usuarios' immediate="true" /></li>
+			       </c:if>
+			       <c:if test="#{permissoes['2'] == true || permissoes['3'] == true || usuario.idPerfil == 1 || usuario.idPerfil == 3}">
+			       		<li><h:commandLink value="Arquivos" action="#{arquivoBean.template}" id='aba_arquivos' immediate="true" /></li>
+			       </c:if>
+			       	<c:if test="#{permissoes['2'] == true || usuario.idPerfil == 1 || usuario.idPerfil == 3}">
+			       		<li><h:commandLink value="Histórico" action="/pages/historico/historico" id='aba_historico' immediate="true" /></li>
+			       </c:if>
+			       	<c:if test="#{permissoes['2'] == true || usuario.idPerfil == 1 || usuario.idPerfil == 3}">
+			       		<li><h:commandLink value="Email" action="#{emailBean.template}" id='aba_email' immediate="true" /></li>
+			       </c:if>
+			       
+			   	</ul>
+		   	</h:form>
+		</div>
+		<h:form prependId="false" id="form_toolbal">
+			<table width="100%" cellpadding="0" cellspacing="0" class="background" style="border-bottom:1px solid #D9D9D9;">
+			  <tr>
+			  	 <td align="right">
+					<table>
+					<tr>
+						<c:if test="#{usuario.idPerfil == 1}">
+							<td>
+								<p:selectOneMenu  id="cliente_sessao" value="#{loginBean.usuario.idCliente}">
+									<f:selectItems value="#{monitoracaoBean.clientes}" itemLabel="#{c.nome}" itemValue="#{c.id}" var="c"/>
+									<p:ajax listener="#{loginBean.alterarCliente}" oncomplete="reloadPage('#{request.contextPath}#{home}.jsf')" process="cliente_sessao" />
+								</p:selectOneMenu>
+							</td>
+							<td>
+								<p:menuButton value="Administração">  
+							        <p:menuitem value="Clientes"  action="/pages/cliente/template" icon="ui-icon-extlink" ajax="false"/>  
+							    </p:menuButton>
+							</td>
+						</c:if>
+						<td>
+							<h:outputText value="#{usuario.email}" /> às <h:outputText value="#{usuario.horaAcesso}" />
+						</td>
+						<td>
+							<h:commandLink id='notificacoes' action="/pages/notificacao/template" immediate="true">
+								<div class="notificacoes">
+									<h:outputText value="#{loginBean.totalNotificacoes}" title="Notificações"/>
+								</div>
+							</h:commandLink>
+						</td>
+						<td>
+							<h:commandLink id='perfil' action="/pages/perfil/template_perfil" immediate="true">
+								<h:graphicImage url="/assets/images/icons/grey/configuration.png" alt="Alterar perfil" title="Alterar perfil"/>
+							</h:commandLink>
+						</td>
+						<td>
+							<h:commandLink id='sair' action="#{loginBean.sair}" immediate="true">
+								<h:graphicImage url="/assets/images/icons/grey/shut-down.png" alt="Sair" title="Sair"/>
+							</h:commandLink>
+						</td>
+					</tr>
+					</table>
+				</td>
+			  </tr>
+			</table>
+		</h:form>
+	</c:if>
+	
+    <ui:insert name="body">
+	
+	</ui:insert>
+	
+  </h:body>
+</html>
